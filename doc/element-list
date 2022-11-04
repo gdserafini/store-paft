@@ -1,0 +1,16 @@
+com.store
+com.store.buy
+com.store.buy.options
+com.store.cart
+com.store.cart.options
+com.store.database
+com.store.database.db
+com.store.graphic
+com.store.inventory
+com.store.inventory.options
+com.store.login
+com.store.main
+com.store.main.is
+com.store.product
+com.store.user
+com.store.user.users
