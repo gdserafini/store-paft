@@ -1,5 +1,7 @@
 package com.store.product;
 
+import com.store.lib.Lib;
+
 public class Product implements Comparable<Product> {
 	
 	private String name;
@@ -7,49 +9,43 @@ public class Product implements Comparable<Product> {
 	private int amount;
 	
 	public Product(String name, double price, int amount) {
-		if(name == null || name.length() == 0 || price < 0 || amount < 0) {
-			throw new IllegalArgumentException("Dados inválidos.");
-		}
-		
+		Lib.validsArgs(name, price, amount);
 		this.name = name;
 		this.price = price;
 		this.amount = amount;
 	}
 
-	public String getName() {
-		return name;
-	}
+	public String getName() { return this.name; }
 
 	public void setName(String name) {
+		Lib.validsArgs(name);
 		this.name = name;
 	}
 
-	public double getPrice() {
-		return price;
-	}
+	public double getPrice() { return this.price; }
 
 	public void setPrice(double price) {
+		Lib.validsPositiveNumbers(price);
 		this.price = price;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
+	public int getAmount() { return this.amount; }
 
 	public void setAmount(int amount) {
+		Lib.validsPositiveNumbers(amount);
 		this.amount = amount;
 	}
 	
 	@Override
 	public String toString() {
-		var product = String.format(
+		return String.format(
 				"\nNome: %s\nPreço: R$ %.2f\nQuantidade: %d", 
 				this.name, this.price, this.amount);
-		return product;
 	}
 	
 	@Override
 	public int compareTo(Product product) {
+		Lib.validsArgs(product);
 		return (int)(product.getPrice() - this.price);
 	}
 

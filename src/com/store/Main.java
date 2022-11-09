@@ -20,5 +20,6 @@ public class Main {
 		else {
 			Graphic.printMsgErrorDataBase();
 		}
+		
 	}  
 }
