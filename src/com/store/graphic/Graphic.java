@@ -60,6 +60,15 @@ public class Graphic {
 		System.out.println("PAFT Store - Menu principal.");
 	}
 	
+	public static void printMainMenuOptions(Integer number) {
+		System.out.println("\nDigite 1 para ir as compras."
+				+ "\n(auth)Digite 2 para relatório."
+				+ "\nDigite 3 para mudar o usuário."
+				+ "\nDigite 4 para saber mais sobre a loja."
+				+ "\n(admin)Digite 5 para gerenciar o estoque."
+				+ "\nDigite 6 para sair.");
+	}
+	
 	public static void printMainMenuOptions() {
 		System.out.println("\nDigite 1 para ir as compras."
 				+ "\n(auth)Digite 2 para relatório."

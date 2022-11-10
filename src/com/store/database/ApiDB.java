@@ -13,11 +13,10 @@ public class ApiDB {
 
 		try {
 			return DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/store?user=root&password=password");
+					"jdbc:mysql://localhost:3306/store?user=root&password=password"
+					);
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		} 
+		catch(SQLException e) { e.printStackTrace(); } 
 		
 		return null;
 	}

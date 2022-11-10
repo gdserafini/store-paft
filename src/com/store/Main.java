@@ -1,5 +1,7 @@
 package com.store;
 
+import java.util.Scanner;
+
 import com.store.database.ApiDB;
 import com.store.graphic.Graphic;
 import com.store.login.Login;
@@ -19,7 +21,6 @@ public class Main {
 		}
 		else {
 			Graphic.printMsgErrorDataBase();
-		}
-		
+		}		
 	}  
 }

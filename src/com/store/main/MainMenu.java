@@ -3,6 +3,7 @@ package com.store.main;
 import java.util.Scanner;
 import com.store.buy.BuyMenu;
 import com.store.graphic.Graphic;
+import com.store.lib.Lib;
 import com.store.login.Login;
 import com.store.main.is.Relatory;
 import com.store.user.Authenticable;
@@ -11,7 +12,7 @@ import com.store.user.users.Admin;
 public class MainMenu {
 
 	private Login login;
-	private int choose;
+	private int choice;
 	private static final Scanner scan = new Scanner(System.in);
 	private static final int BUY = 1;
 	private static final int RELAT = 2;
@@ -21,11 +22,7 @@ public class MainMenu {
 	private static final int EXIT = 6;
 	
 	public MainMenu(Login login) {
-		
-		if(login == null) {
-			throw new IllegalArgumentException("Login indefinido.");
-		}
-		
+		Lib.validsArgs(login);
 		this.login = login;
 	}
 	
@@ -35,59 +32,51 @@ public class MainMenu {
 		
 		while(true) {
 			
-			try {
-				Graphic.printMainMenuOptions();
-				this.choose = scan.nextInt();
-			}
-			catch(Exception e){
-				throw new IllegalArgumentException("Entrada inválida de dados.");
-			}
+			Graphic.printMainMenuOptions();
+			this.choice = scan.nextInt();
+			
+			if(choice == BUY) { buy(); } 
+			else if(choice == RELAT) { relatory(); }  
+			else if(choice == CHA_USER) { break; }
+			else if(choice == ABOUT) { Graphic.printMsgAbout(); }  
+			else if(choice == MNG_INV) { manageInventory(); }  
+			else if(choice == EXIT) { exit(); }  
+			else Graphic.printMsgInvalidValue();
 				
-				if(this.choose == BUY) {
-
-                    var buyMenu = new BuyMenu(this.login);
-                    buyMenu.run();
-					
-				}
-				else if(this.choose == RELAT) {
-
-                    var is = new EnterIS();
-                    
-                    try {
-	                    if(is.canEnter((Authenticable)this.login.getLoggedUser())) {
-	                    	is.run(RELAT);
-	                    }
-                    }
-                    catch(Exception e) {
-                    	Graphic.printMsgInvalidAcess();
-                    }                 				
-				}
-				else if(this.choose == CHA_USER) {
-					break;
-				}
-				else if(this.choose == ABOUT){
-                    Graphic.printMsgAbout();
-				}
-				else if(this.choose == MNG_INV) {
-
-					var is = new EnterIS();
-                    
-                    try {
-	                    if(is.canEnter((Admin)this.login.getLoggedUser())) {
-	                    	is.run(MNG_INV);
-	                    }
-                    }
-                    catch(Exception e) {
-                    	Graphic.printMsgInvalidAcess();
-                    }
-				}
-				else if(this.choose == EXIT) {
-                    Graphic.printEnd();
-					System.exit(0);
-				}
-				else {
-					Graphic.printMsgInvalidValue();
-				}
 		}
+	}
+	
+	private void buy() {
+		var buyMenu = new BuyMenu(this.login);
+        buyMenu.run();
+	}
+	
+	private void relatory() {        
+        try {
+        	var is = new EnterIS();
+            if(is.canEnter((Authenticable)this.login.getLoggedUser())) {
+            	is.run(RELAT);
+            }
+        }
+        catch(Exception e) {
+        	Graphic.printMsgInvalidAcess();
+        } 
+	}
+	
+	private void manageInventory() {        
+        try {
+        	var is = new EnterIS();
+            if(is.canEnter((Admin)this.login.getLoggedUser())) {
+            	is.run(MNG_INV);
+            }
+        }
+        catch(Exception e) {
+        	Graphic.printMsgInvalidAcess();
+        }
+	}
+	
+	private void exit() {
+		Graphic.printEnd();
+		System.exit(0);
 	}
 }

@@ -1,6 +1,13 @@
 package com.store.lib;
 
+import java.util.Scanner;
+import java.util.function.Consumer;
+
+import com.store.graphic.Graphic;
+
 public class Lib {
+	
+	private static final Scanner scan = new Scanner(System.in);
 	
 	public static boolean invalidArgs(Object...objects) {
 		for(Object obj : objects) {
