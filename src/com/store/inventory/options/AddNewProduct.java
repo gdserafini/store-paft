@@ -7,42 +7,38 @@ import com.store.graphic.Graphic;
 public class AddNewProduct {
 	
 	private static final Scanner scan = new Scanner(System.in);
+	private static final ProductsDB pdb = new ProductsDB();
+	private double price;
+	private int amount;
+	private String name;
 	
 	public void add() {
-		
-		try {
 			
 			Graphic.printMsgProductName();
-			var name = scan.nextLine();
+			this.name = scan.nextLine();
 			
-			var pdb = new ProductsDB();
+			if(this.pdb.getProduct(this.name) == null) {
 			
-			if(pdb.getProduct(name) == null) {
-			
-				Graphic.printMsgEnterNewPrice();
-				var price = Double.parseDouble(scan.nextLine());
+				try { getNewPrice(); getNewAmount(); }
+				catch(Exception e) { Graphic.printMsgInvalidType(); return; }
 				
-				Graphic.printMsgEnterNewAmount();
-				var amount = scan.nextInt();
-				
-				if(pdb.createProduct(name, price, amount)) {
+				if(this.pdb.createProduct(this.name, this.price, this.amount)) {
 					Graphic.printMsgCreated();
 				}
-				else {
-					Graphic.printMsgCreateError();
-				}
+				else { Graphic.printMsgCreateError(); }
 			}
-			else {
-				Graphic.printMsgAlreadyExists();
-				return;
-			}
+			else { Graphic.printMsgAlreadyExists(); return; }
 			
 		}
-		catch(Exception e) {
-			Graphic.printMsgInvalidType();
-			return;
-		}
 		
+	private void getNewPrice() {
+		Graphic.printMsgEnterNewPrice();
+		this.price = Double.parseDouble(scan.nextLine());
+	}
+	
+	private void getNewAmount() {
+		Graphic.printMsgEnterNewAmount();
+		this.amount = scan.nextInt();
 	}
 
 }

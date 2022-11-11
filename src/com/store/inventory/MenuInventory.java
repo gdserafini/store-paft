@@ -14,7 +14,7 @@ public class MenuInventory {
 	private static final int ADD = 2;
 	private static final int REMOVE = 3;
 	private static final int EXIT = 4;
-	private int choose;
+	private int choice;
 	
 	public void run() {
 		
@@ -24,36 +24,26 @@ public class MenuInventory {
 			
 			try {
 				Graphic.printInventoryMenuOptions();
-				choose = scan.nextInt();
+				this.choice = scan.nextInt();
 			}
 			catch(Exception e) {
 				throw new IllegalArgumentException("Entrada de dados inválida.");
 			}
 				
-				if(choose == CHANGE) {
-					
+				if(choice == CHANGE) {
 					var changeProduct = new ChangeProduct();
 					changeProduct.change();
-					
 				}
-				else if(choose == ADD) {
-
+				else if(choice == ADD) {
 					var addNewProduct = new AddNewProduct();
-					addNewProduct.add();
-                    
+					addNewProduct.add();   
 				}
-				else if(choose == REMOVE) {
-
+				else if(choice == REMOVE) {
 					var removeProduct = new RemoveProduct();
-					removeProduct.remove();
-					
+					removeProduct.remove();	
 				}
-				else if(choose == EXIT) {
-					break;
-				}
-				else {
-                    Graphic.printMsgInvalidValue();
-				}
+				else if(choice == EXIT) { break; }
+				else { Graphic.printMsgInvalidValue(); }
 		}	
 	}	
 }

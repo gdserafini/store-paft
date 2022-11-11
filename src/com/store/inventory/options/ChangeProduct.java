@@ -4,28 +4,27 @@ import java.util.Scanner;
 
 import com.store.database.db.ProductsDB;
 import com.store.graphic.Graphic;
+import com.store.lib.Lib;
 
 public class ChangeProduct {
 	
 	private static final Scanner scan = new Scanner(System.in);
 	private static final int PRICE = 1;
 	private static final int AMOUNT = 1;
+	private static final ProductsDB pdb = new ProductsDB();
 	
 	public void change() {
 		
 		Graphic.printMsgProductName();
 		var productName = scan.nextLine();
 		
-		var pdb = new ProductsDB();
-		
-		if(pdb.getProduct(productName) == null) Graphic.printMsgNotFound();
+		if(this.pdb.getProduct(productName) == null) Graphic.printMsgNotFound();
 		else changeProductData(productName);
 		
 	}
 	
 	private void changeProductData(String productName) {
-		
-		var pdb = new ProductsDB();
+		Lib.validsArgs(productName);
 		
 			try {
 				Graphic.printMsgOptionsChange();
